@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-'''A module for managing a collection of lockboxes.
+'''A module for managing a collection of lockboxes
 '''
 
 
 def canUnlockAll(boxes):
     '''Checks if all the boxes in a list of boxes containing the keys
     (indices) to other boxes can be unlocked, starting with the first
-    box already unlocked.
+    box already unlocked
     '''
     n = len(boxes)
     seen_boxes = set([0])
@@ -18,5 +18,5 @@ def canUnlockAll(boxes):
         if boxIdx not in seen_boxes:
             unseen_boxes = unseen_boxes.union(boxes[boxIdx])
             seen_boxes.add(boxIdx)
-    return n == len(seen_boxes)
+            return n == len(seen_boxes)
 
