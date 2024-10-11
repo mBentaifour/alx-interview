@@ -8,6 +8,7 @@ def canUnlockAll(boxes):
     (indices) to other boxes can be unlocked, starting with the first
     box already unlocked
     '''
+
     n = len(boxes)
     seen_boxes = set([0])
     unseen_boxes = set(boxes[0]).difference(set([0]))
@@ -18,5 +19,4 @@ def canUnlockAll(boxes):
         if boxIdx not in seen_boxes:
             unseen_boxes = unseen_boxes.union(boxes[boxIdx])
             seen_boxes.add(boxIdx)
-            return n == len(seen_boxes)
-
+    return n == len(seen_boxes)
