@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-"""Write a method that calculates the fewest number
-needed to result in exactly n H characters in the file
-"""
 
 def minOperations(n):
     if n <= 1:
@@ -19,3 +16,10 @@ def minOperations(n):
 
     return operations
 
+# Test cases
+if __name__ == "__main__":
+    n = 4
+    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
+
+    n = 12
+    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
