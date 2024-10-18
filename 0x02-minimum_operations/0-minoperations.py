@@ -1,30 +1,28 @@
 #!/usr/bin/python3
+""" Script that computes a minimum operations
+    needed in a CopyAll - Paste task
 """
-Prototype: def minOperations(n)
-Returns an integer
-If n is impossible to achieve, return 0
-"""
+
 
 def minOperations(n):
-    if n <= 1:
+
+    """
+    Method for compute the minimum number
+    of operations for task Copy All and Paste
+
+    Args:
+        n: input value
+        factor_list: List to save the operations
+    Return: the sum of the operations
+    """
+    if n < 2:
         return 0
-
-    operations = 0
-    divisor = 2
-
-    while n > 1:
-        if n % divisor == 0:
-            n //= divisor
-            operations += divisor
-        else:
-            divisor += 1
-
-    return operations
-
-# Test cases
-if __name__ == "__main__":
-    n = 4
-    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
-
-    n = 12
-    print("Min number of operations to reach {} characters: {}".format(n, minOperations(n)))
+    factor_list = []
+    i = 1
+    while n != 1:
+        i += 1
+        if n % i == 0:
+            while n % i == 0:
+                n /= i
+                factor_list.append(i)
+    return sum(factor_list) 
