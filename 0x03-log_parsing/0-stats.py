@@ -6,71 +6,116 @@ Log parsing
 After every ten lines or upon keyboard interruption (CTRL + C),
 prints the following statistics:
     - Total file size up to that point
-    - Count of read status codes up to that point
+Total file size: File size: <total size>
+where <total size> is the sum of all previous <file size> (see input format above)
+Number of lines by status code:
+possible status code: 200, 301, 400, 401, 403, 404, 405 and 500
+if a status code doesn’t appear or is not an integer, don’t print anything for this status code
+format: <status code>: <number>
+status codes should be printed in ascending order
 """
 
+import sys
 
-def print_stats(size, status_codes):
-    """Print accumulated metrics
 
-    Args:
-        size (int): The accumulated read file size.
-        status_codes (dict): The accumulated count of status codes.
-    """
-    print("File size: {}".format(size))
-    for key in sorted(status_codes):
-        print("{}: {}".format(key, status_codes[key]))
+i = 0
+totalsize = 0
+status = [200, 301, 400, 401, 403, 404, 405, 500]
+dict = {200: 0, 301: 0, 400: 0, 401: 0,
+        403: 0, 404: 0, 405: 0, 500: 0}
+
+
+def printstatus(dict, totalsize):
+    """print status"""
+    print("File size: {}".format(totalsize))
+    for item in status:
+        if dict[item]:
+            print("{}: {}".format(item, dict[item]))
 
 
 if __name__ == "__main__":
-    import sys
-    import signal
-
-    # Initialize metrics
-    size = 0
-    status_codes = {
-        200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0
-    }
-    count = 0
-
-    def signal_handler(sig, frame):
-        """Handle keyboard interruption and print final stats."""
-        print_stats(size, status_codes)
-        sys.exit(0)
-
-    # Register signal handler for keyboard interrupt
-    signal.signal(signal.SIGINT, signal_handler)
-
     try:
         for line in sys.stdin:
-            if count == 10:
-                print_stats(size, status_codes)
-                count = 0
-
-            line = line.split()
-
-            try:
-                # Accumulate file size
-                size += int(line[-1])
-            except (IndexError, ValueError):
-                # Skip lines that don't conform to the expected format
+            if i != 0 and i % 10 == 0:
+                printstatus(dict, totalsize)
+            mylist = line.split(' ')
+            if len(mylist) != 9:
                 continue
-
+            i += 1
             try:
-                # Accumulate status code counts
-                status_code = int(line[-2])
-                if status_code in status_codes:
-                    status_codes[status_code] += 1
-            except (IndexError, ValueError):
-                # Skip lines with invalid or missing status codes
-                continue
-
-            count += 1
-
-        # Print final statistics after EOF
-        print_stats(size, status_codes)
-
+                totalsize += int(mylist[-1])
+                stat = int(mylist[-2])
+            except Exception:
+                pass
+            if stat in status:
+                dict[stat] += 1
+        printstatus(dict, totalsize)
     except KeyboardInterrupt:
-        # Handle keyboard interrupt and print stats
-        print_stats(size, status_codes)
-        sys.exit(0)
+        printstatus(dict, totalsize)
+        raise
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
