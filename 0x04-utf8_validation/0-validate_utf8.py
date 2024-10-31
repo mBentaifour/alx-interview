@@ -1,25 +1,25 @@
 #!/usr/bin/python3
-
+#!/usr/bin/python3
 """
-UTF-8 Validation
+Task 0. UTF-8 Validation
 
-a method that determines if a given data set represents a valid UTF-8 encoding
+Determines whether a given data is a valid UTF-8 or not
 """
 
 
 def validUTF8(data):
-
-    """
+    """validUTF8
 
     A method that determines if a given data set
     represents a valid UTF-8 encoding or not
 
-    Prototype: def validUTF8(data)
-    Return: True if data is a valid UTF-8 encoding, else return False
+    Arguments:
+        data (List[int]): A list of integers that represent characters to
+                          check their UTF-8
 
-    A character in UTF-8 can be 1 to 4 bytes long
-    The data set can contain multiple characters
-    The data will be represented by a list of integers
+    Return:
+        (bool): [True: If data is a valid UTF-8 / False: If data is not
+                 a valid UTF-8]
     """
     remaining_bytes = 0
     byte_mask_1 = 1 << 7  # 10000000
