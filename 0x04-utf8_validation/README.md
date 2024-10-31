@@ -1,4 +1,4 @@
-************************************* utf8 validation *****************************************
+utf8 validation
 
 This code is designed to validate if a list of integers represents valid UTF-8 encoded data. Each integer in the list represents a byte in the encoding, and the code checks if these bytes adhere to UTF-8 encoding rules. Here’s a breakdown of how it works:
 
@@ -65,4 +65,3 @@ In this example:
 2. `130` (`10000010`) matches the `10xxxxxx` format as a continuation byte, decrementing `remaining_bytes` to `0`.
 3. `1` (`00000001`) is a valid 1-byte character, so the function returns `True`. 
 
-In summary, the code ensures each byte sequence follows UTF-8 encoding rules, making it a valid or invalid UTF-8 sequence depending on the outcome.
