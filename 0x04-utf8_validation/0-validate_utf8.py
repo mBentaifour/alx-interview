@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
+
 """
 Task 0. UTF-8 Validation
 
