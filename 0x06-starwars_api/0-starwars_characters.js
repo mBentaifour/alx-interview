@@ -25,7 +25,7 @@ request(url, (error, response, body) => {
   }
 
   // Itère à travers chaque URL de personnage et affiche le nom
-  filmData.characters.forEach((characterUrl) => {
+  const printCharacterName = (characterUrl) => {
     request(characterUrl, (error, response, body) => {
       if (error) {
         console.error(error);
@@ -35,5 +35,8 @@ request(url, (error, response, body) => {
       const characterData = JSON.parse(body);
       console.log(characterData.name);
     });
-  });
+  };
+
+  // Utilise `forEach` pour chaque personnage de la liste
+  filmData.characters.forEach(printCharacterName);
 });
