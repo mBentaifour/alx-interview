@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+
 """Prime game Maria and Ben are playing a game
 """
 
 
 def isWinner(x, nums):
+
     """Determines the winner of a prime game session with `x` rounds.
     """
     if x < 1 or not nums:
@@ -26,4 +28,3 @@ def isWinner(x, nums):
     if marias_wins == bens_wins:
         return None
     return 'Maria' if marias_wins > bens_wins else 'Ben'
-
